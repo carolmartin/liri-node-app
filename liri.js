@@ -53,15 +53,49 @@ function myTweets() {
             else {
                 numTweets = tweets.length;
             }
-            for (i = 0; i < numTweets; i++){
+            for (i = 0; i < numTweets; i++) {
                 console.log(tweets[i].text);
                 console.log(tweets[i].created_at);
             }
 
         }
     });
-  }
+}
 
 function spotifySong() {
-    
+    spotifyVar.search({ type: 'track', query: 'All the Small Things' }, function (err, data) {
+        if (err) {
+            return console.log('Error occurred: ' + err);
+        }
+
+        //   console.log(spotifyVar[0]);
+        // console.log("data length: " + (data.tracks.items.length));
+
+        // console.log(data.tracks);
+        // console.log("Song name: " + data.tracks.items[0].name);
+        // console.log("Artist: " + JSON.stringify(data.tracks.items[0].artists[0], null, 2));
+        // console.log("Artist-name: " + JSON.stringify(data.tracks.items[0].artists[0].name));
+        // console.log("Preview link of song: " + data.tracks.items[0].href);
+        // console.log("Album: " + JSON.stringify(data.tracks.items[0].album.name, null, 2));
+
+
+        if (data.tracks.items.length > 20) {
+            numSpotify = 20;
+
+        }
+        else {
+            numSpotify = data.tracks.items.length;
+
+        }
+        console.log(("------- Spotify List of Songs --------"));
+        console.log("number of Spotify returns: " + numSpotify);
+        for (i = 0; i < numSpotify; i++) {
+            console.log(i + "  --------------------------------")
+            console.log("Song name: " + data.tracks.items[i].name);
+            console.log("Artist-name: " + JSON.stringify(data.tracks.items[i].artists[0].name));
+            console.log("Preview link of song: " + data.tracks.items[i].href);
+            console.log("Album: " + JSON.stringify(data.tracks.items[i].album.name, null, 2));
+
+        }
+    });
 }
